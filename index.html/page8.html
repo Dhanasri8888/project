@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditya</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-image: url('https://lectera.com/info/storage/img/20220816/4e30305d1be37f7f6ec3_808xFull.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: gold;
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80%;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+
+    #link-input, #desc-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      color: black;
+    }
+
+    #insert-button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #insert-button:hover {
+      background-color: #45a049;
+    }
+
+    .resource-list {
+      list-style-type: none;
+      padding: 0;
+      width: 80%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+      gap: 20px; /* Space between grid items */
+    }
+
+    .resource-list li {
+      margin-bottom: 15px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .resource-list li:hover {
+      transform: scale(1.03);
+      background-color: rgba(0, 0, 0, 0.7);
+      text-shadow: 0 0 3px #fff; /* Add a white text shadow on hover */
+    }
+
+    .resource-list a {
+      color: lightblue;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .resource-list a:hover {
+      color: white;
+    }
+
+    .remove-button {
+      margin-left: 10px;
+      padding: 4px 8px;
+      background-color: #FF5733;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .remove-button:hover {
+      background-color: #C70039;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aditya</h1>
+
+  <div class="input-container">
+      <input type="text" id="link-input" placeholder="Enter URL" required>
+      <input type="text" id="desc-input" placeholder="Enter description" required>
+      <button id="insert-button">Insert Link</button>
+  </div>
+
+  <ul class="resource-list" id="resource-list">
+    <li><a href="https://acet.ac.in/" target="_blank">Website Acet</a> - Aditya Main page.</li>
+    <li><a href="https://outlook.office.com/mail/" target="_blank">Outlook</a> - Must-do Important Mails for 23MH1A4248.</li>
+    <li><a href="https://info.aec.edu.in/ACET/StudentMaster.aspx" target="_blank">Attendance</a> - Attendance in Aditya.</li>
+    <li><a href="https://www.linkedin.com/in/dhanasri-parisam-a1a449291/" target="_blank">LinkedIn</a> - LinkedIn for various resources.</li>
+    <li><a href="https://leetcode.com/" target="_blank">LeetCode</a> - Improve your coding skills with practice problems and contests.</li>
+    <li><a href="https://github.com/Dhanasri-Parisam" target="_blank">GitHub</a> - Storing various resource lists like interview topics.</li>
+    <li><a href="https://www.geeksforgeeks.org/user/dhanasri_08/" target="_blank">GeeksforGeeks</a> - Improve your coding skills with practice problems and contests.</li>
+    <li><a href="https://technicalhub.io/" target="_blank">College Interview Tips</a> - Technical hub.</li>
+  </ul>
+
+  <script>
+      const insertButton = document.getElementById('insert-button');
+      const linkInput = document.getElementById('link-input');
+      const descInput = document.getElementById('desc-input');
+      const resourceList = document.getElementById('resource-list');
+
+      // Define whether the user is an admin
+      const isAdmin = true; // Change this to false for non-admin users
+
+      insertButton.addEventListener('click', () => {
+          const newLink = linkInput.value.trim();
+          const linkDesc = descInput.value.trim();
+
+          if (newLink !== "" && linkDesc !== "") {
+              // Create a new list item for the new link
+              const newLi = document.createElement('li');
+              newLi.style.marginBottom = '15px';
+              newLi.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+              newLi.style.padding = '15px';
+              newLi.style.borderRadius = '8px';
+              newLi.style.boxShadow = '2px 2px 5px rgba(0,0,0,0.3)';
+              newLi.style.transition = 'transform 0.2s ease, background-color 0.2s ease';
+
+              const newA = document.createElement('a');
+              newA.href = newLink;
+              newA.target = "_blank";
+              newA.textContent = linkDesc;
+              newA.style.color = 'lightblue';
+              newA.style.textDecoration = 'none';
+              newA.style.display = 'block';
+              newA.style.marginBottom = '5px';
+
+              newLi.appendChild(newA);
+
+              // Only add the remove button if the user is an admin
+              if (isAdmin) {
+                  const removeButton = document.createElement('button');
+                  removeButton.textContent = 'Remove';
+                  removeButton.classList.add('remove-button');
+                  removeButton.addEventListener('click', () => {
+                      newLi.remove();
+                      showSuccessMessage('Removed successfully! ✔️');
+                  });
+                  newLi.appendChild(removeButton);
+              }
+
+              // Append the new link to the resource list
+              resourceList.appendChild(newLi);
+
+              // Show insertion success message
+              showSuccessMessage('Inserted successfully! ✔️');
+
+              // Clear the input fields after adding
+              linkInput.value = ''; 
+              descInput.value = ''; 
+          } else {
+              alert("Please enter a valid link and description!");
+          }
+      });
+
+      // Function to show success messages
+      function showSuccessMessage(message) {
+          const successMessage = document.createElement('div');
+          successMessage.textContent = message;
+          successMessage.style.backgroundColor = '#4CAF50';
+          successMessage.style.color = 'white';
+          successMessage.style.padding = '10px';
+          successMessage.style.borderRadius = '5px';
+          successMessage.style.position = 'fixed';
+          successMessage.style.top = '20px';
+          successMessage.style.right = '20px';
+          successMessage.style.zIndex = '1000';
+          successMessage.style.transition = 'opacity 0.5s ease';
+          document.body.appendChild(successMessage);
+
+          // Fade out after 2 seconds
+          setTimeout(() => {
+              successMessage.style.opacity = '0';
+              setTimeout(() => {
+                  successMessage.remove();
+              }, 500);
+          }, 2000);
+      }
+  </script>
+</body>
+</html>

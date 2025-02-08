@@ -1,0 +1,100 @@
+/* style.css */
+body {
+    background-image: url('background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 5em;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    color: #FFD700;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.boxes-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.top-boxes {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.bottom-boxes {
+    margin-bottom: 40px;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    border: 5px solid #fff;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    animation: pulse 2s infinite alternate;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    background-position: center;
+}
+
+.cover-image {
+    background-size: contain; /* Contain for the first image */
+}
+.box:not(.cover-image) {
+    background-size: cover; /* Cover for all other images */
+}
+
+.box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: inherit;
+    transition: opacity 0.3s ease;
+    opacity: 0; /*Start with no overlay*/
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-inner {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.box:hover {
+    transform: scale(1.1);
+}
+
+.box:hover::after {
+    opacity: 1; /* Show overlay on hover */
+}

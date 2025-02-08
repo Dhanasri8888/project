@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickRabbit</title>
+    <link rel="stylesheet" href="candy1.css">
+    <style>
+        body {
+            overflow-y: scroll;
+            margin: 0; /* Remove default margin */
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9; /* Light background for better contrast */
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            background-color: yellow; /* Yellow background color */
+            padding: 15px; /* Increased padding for size */
+            width: 100%; /* Full width */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+        }
+        .menu-item {
+            margin: 0 20px; /* Increased margin for spacing */
+            font-size: 22px; /* Increased font size */
+            color: black; /* Black text color */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s;
+        }
+        .menu-item:hover {
+            color: #FFD700; /* Gold color on hover */
+        }
+        .box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 10px;
+            border-radius: 10px; /* Rounded corners for boxes */
+            overflow: hidden; /* Ensure content stays within the box */
+        }
+        .box-name {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 14px;
+            padding: 5px 0;
+            transition: background-color 0.3s;
+        }
+        .box:hover .box-name {
+            background-color: rgba(0, 0, 0, 0.7); /* Darker overlay on hover */
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        }
+        .search-bar input, .search-bar button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin: 5px; /* Adjusted margin for better spacing */
+            font-size: 18px; /* Increased size */
+        }
+        #searchInput:hover {
+            background-color: lightpink; /* Light pink color */
+        }
+        #searchInput:focus {
+            background-color: lightblue; /* Light blue color */
+        }
+        #googleSearch:hover {
+            background-color: lightgreen; /* Light green color */
+        }
+        #chatbotSearch:hover {
+            background-color: lightcoral; /* Light coral color */
+        }
+        #aboutUs:hover {
+            background-color: lightyellow; /* Light yellow color */
+        }
+        #insertField:hover {
+            background-color: lightskyblue; /* Light blue color */
+        }
+        #linkedin:hover {
+            background-color: lightgray; /* Light gray color */
+        }
+        .logo {
+            width: 50px; /* Adjust size as needed */
+            height: 50px; /* Adjust size as needed */
+            margin-right: 15px; /* Adjust spacing as needed */
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: none; /* Hidden by default */
+            transition: background-color 0.3s;
+        }
+        .scroll-to-top:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f1f1f1; /* Light gray background */
+        }
+        .social-media a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: black; /* Black color for links */
+            font-size: 20px; /* Font size for social media links */
+        }
+    </style>
+    
+    <script>
+        function searchField() {
+            var input, filter, boxes, boxName, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            boxes = document.getElementsByClassName('box');
+            for (i = 0; i < boxes.length; i++) {
+                boxName = boxes[i].getElementsByClassName('box-name')[0];
+                txtValue = boxName.textContent || boxName.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    boxes[i].style.display = '';
+                } else {
+                    boxes[i].style.display = 'none';
+                }
+            }
+        }
+        function googleSearch() {
+            var query = document.getElementById('searchInput').value;
+            window.open('https://www.google.com/search?q=' + query, '_blank');
+        }
+        function chatbotSearch() {
+            var query = document.getElementById('searchInput').value;
+            window.open('https://gemini.google.com/app?is_sa=1&is_sa=1&android-min-version=301356232&ios-min-version=322.0&campaign_id=bkws&utm_source=sem&utm_source=google&utm_medium=paid-media&utm_medium=cpc&utm_campaign=bkws&utm_campaign=2024enIN_gemfeb&pt=9008&mt=8&ct=p-growth-sem-bkws&gad_source=1&gclid=Cj0KCQiA7se8BhCAARIsAKnF3rz0o1kyMIZ78lRCoHb7N4iMS8O7C9iB-tDK6_-W8UkMK_CwHmT1afgaAg6GEALw_wcB&gclsrc=aw.ds' + query, '_blank');
+        }
+        function goToAboutUs() {
+            window.location.href = 'aboutus.html';
+        }
+        function goToLinkedIn() {
+            window.open('https://www.linkedin.com', '_blank');
+        }
+        function insertField() {
+            alert("Insert Field functionality will be added here!");
+            // You can add logic to insert a new field dynamically
+        }
+
+        // Scroll to top functionality
+        window.onscroll = function() {
+            var button = document.getElementById("scrollToTopBtn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                button.style.display = "block"; // Show button
+            } else {
+                button.style.display = "none"; // Hide button
+            }
+        };
+
+        function scrollToTop() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+</head>
+<body>
+    <div class="menu">
+        <a href="#field3" class="menu-item">portfolio</a>
+        <a href="https://www.instagram.com/__mr__dhanu__08/" class="menu-item">instagram</a>
+        <a href="https://github.com/Dhanasri-Parisam" class="menu-item">github</a>
+        <a href="https://www.geeksforgeeks.org/problem-of-the-day" class="menu-item">GFG</a>
+        <a href="https://leetcode.com/u/Parisam_Dhanasri-08/" class="menu-item">leetcode</a>
+        <a href="#field6" class="menu-item">contact us</a>
+    </div>
+    <h1>
+        <img src="https://static.vecteezy.com/system/resources/previews/052/243/216/non_2x/quick-rabbit-running-joyfully-spreading-happy-vibes-free-png.png" alt="QuickRabbit Logo" class="logo">
+        QuickRabbit
+    </h1>
+    <div class="search-bar">
+        <button id="linkedin" onclick="goToLinkedIn()">LinkedIn</button>
+        <button id="googleSearch" onclick="googleSearch()">Google Search</button>
+        <input type="text" id="searchInput" onkeyup="searchField()" placeholder="Search for field names.." class="search-bar">
+        <button id="chatbotSearch" onclick="chatbotSearch()">Chatbot Search</button>
+        <button id="aboutUs" onclick="goToAboutUs()">About Us</button>
+        <button id="insertField" onclick="insertField()">Insert Field</button> <!-- New Button -->
+    </div>
+    <div class="boxes-container top-boxes">
+        <a href="page1.html" target="_blank">
+            <div class="box cover-image" style="background-image: url('https://clipart-library.com/2023/concept-programming-languages-from-around-world-man-programmer-showing-program-laptop_206127-480.jpg');">
+                <div class="box-name">Coding</div>
+            </div>
+        </a>
+        <a href="page2.html" target="_blank">
+            <div class="box" style="background-image: url('https://aquinascollege.ca/wp-content/uploads/2024/02/how-to-prepare-for-a-job-interview.webp');">
+                <div class="box-name">Interview</div>
+            </div>
+        </a>
+        <a href="page3.html" target="_blank">
+            <div class="box" style="background-image: url('https://www.odishaage.com/wp-content/uploads/2021/11/d56d20b4-1072-48c0-b832-deecf6641d49.jpg');">
+                <div class="box-name">Development</div>
+            </div>
+        </a>
+        <a href="page4.html" target="_blank">
+            <div class="box" style="background-image: url('https://clearinfo.in/wp-content/uploads/2023/04/Employees-communicating.jpg');">
+                <div class="box-name">Communication</div>
+            </div>
+        </a>
+        <a href="page5.html" target="_blank">
+            <div class="box" style="background-image: url('https://img.freepik.com/premium-photo/modern-technology-icon_1197721-134407.jpg');">
+                <div class="box-name">Personal Development</div>
+            </div>
+        </a>
+    </div>
+    <div class="boxes-container middle-boxes">
+        <a href="page6.html" target="_blank">
+            <div class="box" style="background-image: url('https://lwks.com/hubfs/The%20Future-min.webp');">
+                <div class="box-name">Video Editing</div>
+            </div>
+        </a>
+        <a href="page7.html" target="_blank">
+            <div class="box" style="background-image: url('https://img.etimg.com/thumb/width-1600,height-900,imgsize-455926,resizemode-75,msid-114323492/markets/stocks/news/ahead-of-market-10-things-that-will-decide-stock-action-on-friday.jpg');">
+                <div class="box-name">Stock Market</div>
+            </div>
+        </a>
+        <a href="page8.html" target="_blank">
+            <div class="box" style="background-image: url('https://cdn-eu.aglty.io/sunstoneuniversity/Attachments/NewItems/1_20240709115018.jpg');">
+                <div class="box-name">Aditya</div>
+            </div>
+        </a>
+        <a href="page9.html" target="_blank">
+            <div class="box" style="background-image: url('https://www.moretimepa.co.uk/wp-content/uploads/Freelancer.jpg');">
+                <div class="box-name"> Freelancing</div>
+            </div>
+        </a>
+        <a href="page10.html" target="_blank">
+            <div class="box" style="background-image: url('https://media.licdn.com/dms/image/D560DAQF9CShQ-6q-XQ/learning-public-crop_288_512/0/1684948662603?e=2147483647&v=beta&t=lpjHwnK4H9Tdn-pwbxBjZZVREBfAM_ubBnRiyi654Kw');">
+                <div class="box-name">LinkedIn/Github</div>
+            </div>
+        </a>
+    </div>
+    <button id="scrollToTopBtn" class="scroll-to-top" onclick="scrollToTop()">↑ Top</button>
+</body>
+</html>
